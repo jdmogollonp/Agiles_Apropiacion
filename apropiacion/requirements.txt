@@ -1,0 +1,7 @@
+dataclasses==0.6
+Django==2.1.1
+django-storages==1.7.1
+virtualenv==16.0.0
+virtualenvwrapper-win==1.2.5
+wrapt==1.10.11
+gunicorn==19.9.0
