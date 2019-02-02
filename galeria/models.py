@@ -7,7 +7,7 @@ class Categoria(models.model):
     def __str__(self):
         return self.nombre
 
-
+# TODO: Incorporar a los usuarios de Django
 class Usuario(models.Model):
     nombres = models.CharField(max_length=50)
     appellidos = models.CharField(max_length=50)
@@ -41,8 +41,13 @@ class Imagen(Multimedia):
     def __str__(self):
         return 'Imagen: ' + self.titulo + '(' + self.fecha_creacion + ')'
 
+
 class Reproducible(Multimedia):
     pass
+
+    class Meta:
+        abstract = True
+
 
 class Audio(Reproducible):
     contenido = models.FileField(upload_to='archivos/audios/')
