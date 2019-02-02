@@ -23,12 +23,6 @@ class Usuario(models.Model):
 
 
 class Multimedia(models.Model):
-    OPCIONES_CATEGORIA = (
-        ('P', 'Personal'),
-        ('L', 'Laboral'),
-        ('A', 'Academica'),
-        ('O', 'Otro'),
-    )
     titulo = models.CharField(max_length=100)
     autor = models.CharField(max_length=100)
     fecha_creacion = models.DateTimeField('fecha creacion')
@@ -47,15 +41,17 @@ class Imagen(Multimedia):
     def __str__(self):
         return 'Imagen: ' + self.titulo + '(' + self.fecha_creacion + ')'
 
+class Reproducible(Multimedia):
+    pass
 
-class Audio(Multimedia):
+class Audio(Reproducible):
     contenido = models.FileField(upload_to='archivos/audios/')
 
     def __str__(self):
         return 'Audio: ' + self.titulo + '(' + self.fecha_creacion + ')'
 
 
-class Video(Multimedia):
+class Video(Reproducible):
     contenido = models.FileField(upload_to='archivos/videos/')
 
     def __str__(self):
@@ -66,7 +62,7 @@ class Clip(models.Model):
     nombre = models.CharField(max_length=50)
     segundo_inicio = models.DecimalField(decimal_places=2)
     segundo_fin = models.DecimalField(decimal_places=2)
-    referencia = models.ForeignKey(Multimedia) #limitar acceso a video y audio unicamente.
+    referencia = models.ForeignKey(Reproducible)
 
 
 
