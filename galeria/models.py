@@ -1,25 +1,36 @@
 from django.db import models
+from django.contrib.auth.models import User
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 
-class Categoria(models.model):
+class Categoria(models.Model):
     nombre = models.CharField(max_length=50)
 
     def __str__(self):
         return self.nombre
 
 # TODO: Incorporar a los usuarios de Django
-class Usuario(models.Model):
-    nombres = models.CharField(max_length=50)
-    appellidos = models.CharField(max_length=50)
+class Perfil(models.Model):
+    usuario = models.OneToOneField(User, on_delete=models.CASCADE)
     pais = models.CharField(max_length=20)
     ciudad = models.CharField(max_length=20)
-    correo = models.CharField(max_length=50)
-    autenticado = models.BooleanField()
-    categoria_favorita = models.ForeignKey(Categoria, on_delete=models.SET_NULL())
+    categorias_favoritas = models.ManyToManyField(Categoria)
     foto = models.ImageField(upload_to='archivos/fotos_usuarios/')
 
     def __str__(self):
         return 'Usuario: ' + self.nombres + ' ' + self.appellidos
+
+
+@receiver(post_save, sender=User)
+def crear_perfil(sender, instance, created, **kwargs):
+    if created:
+        Perfil.objects.create(usuario=instance)
+
+
+@receiver(post_save, sender=User)
+def guardar_perfil(sender, instance, **kwargs):
+    instance.perfil.save()
 
 
 class Multimedia(models.Model):
@@ -28,8 +39,8 @@ class Multimedia(models.Model):
     fecha_creacion = models.DateTimeField('fecha creacion')
     ciudad = models.CharField(max_length=20)
     pais = models.CharField(max_length=20)
-    categoria = models.ForeignKey(Categoria, on_delete=models.SET_NULL())
-    usuario = models.ForeignKey(Usuario, on_delete=models.SET_NULL())
+    categoria = models.ForeignKey(Categoria, null=True, on_delete=models.SET_NULL)
+    usuario = models.ForeignKey(Perfil, null=True, on_delete=models.SET_NULL)
 
     class Meta:
         abstract = True
@@ -44,9 +55,6 @@ class Imagen(Multimedia):
 
 class Reproducible(Multimedia):
     pass
-
-    class Meta:
-        abstract = True
 
 
 class Audio(Reproducible):
@@ -65,9 +73,9 @@ class Video(Reproducible):
 
 class Clip(models.Model):
     nombre = models.CharField(max_length=50)
-    segundo_inicio = models.DecimalField(decimal_places=2)
-    segundo_fin = models.DecimalField(decimal_places=2)
-    referencia = models.ForeignKey(Reproducible)
+    segundo_inicio = models.IntegerField(blank=True, null=True)
+    segundo_fin = models.IntegerField(blank=True, null=True)
+    referencia = models.ForeignKey(Reproducible, on_delete=models.CASCADE)
 
 
 
