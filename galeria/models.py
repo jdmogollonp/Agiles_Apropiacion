@@ -1,3 +1,4 @@
+from Tools.scripts import update_file
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -47,7 +48,7 @@ class Multimedia(models.Model):
 
 
 class Imagen(Multimedia):
-    contenido: models.ImageField(upload_to='archivos/imagenes/')
+    contenido = models.ImageField(blank=True, null=True, upload_to='archivos/imagenes/%Y%m%D/')
 
     def __str__(self):
         return 'Imagen: ' + self.titulo + '(' + self.fecha_creacion + ')'
@@ -58,14 +59,14 @@ class Reproducible(Multimedia):
 
 
 class Audio(Reproducible):
-    contenido = models.FileField(upload_to='archivos/audios/')
+    contenido = models.FileField(upload_to='archivos/audios/%Y%m%D/')
 
     def __str__(self):
         return 'Audio: ' + self.titulo + '(' + self.fecha_creacion + ')'
 
 
 class Video(Reproducible):
-    contenido = models.FileField(upload_to='archivos/videos/')
+    contenido = models.FileField(upload_to='archivos/videos/%Y%m%D/')
 
     def __str__(self):
         return 'Video: ' + self.titulo + '(' + self.fecha_creacion + ')'
