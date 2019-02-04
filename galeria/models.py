@@ -19,7 +19,7 @@ class Perfil(models.Model):
     foto = models.ImageField(upload_to='archivos/fotos_usuarios/')
 
     def __str__(self):
-        return 'Usuario: ' + self.nombres + ' ' + self.appellidos
+        return self.usuario.username
 
 
 @receiver(post_save, sender=User)
@@ -47,10 +47,10 @@ class Multimedia(models.Model):
 
 
 class Imagen(Multimedia):
-    contenido = models.ImageField(blank=True, null=True, upload_to='archivos/imagenes/%Y%m%D/')
+    contenido = models.FileField(blank=True, null=True, upload_to='archivos/imagenes/%Y%m%D/')
 
     def __str__(self):
-        return 'Imagen: ' + self.titulo + '(' + self.fecha_creacion + ')'
+        return self.titulo #+ '(' + self.fecha_creacion + ')'
 
 
 class Reproducible(Multimedia):
@@ -61,14 +61,14 @@ class Audio(Reproducible):
     contenido = models.FileField(upload_to='archivos/audios/%Y%m%D/')
 
     def __str__(self):
-        return 'Audio: ' + self.titulo + '(' + self.fecha_creacion + ')'
+        return self.titulo #+ '(' + self.fecha_creacion + ')'
 
 
 class Video(Reproducible):
     contenido = models.FileField(upload_to='archivos/videos/%Y%m%D/')
 
     def __str__(self):
-        return 'Video: ' + self.titulo + '(' + self.fecha_creacion + ')'
+        return self.titulo #+ '(' + self.fecha_creacion + ')'
 
 
 class Clip(models.Model):
