@@ -1,0 +1,10 @@
+dataclasses==0.6
+Django==2.1.5
+django-storages==1.7.1
+virtualenv==16.0.0
+virtualenvwrapper-win==1.2.5
+wrapt==1.10.11
+gunicorn==19.9.0
+whitenoise==3.2.1
+psycopg2==2.7.7
+Pillow==5.2.0
