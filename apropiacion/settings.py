@@ -77,11 +77,11 @@ WSGI_APPLICATION = 'apropiacion.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ["BD_APROPIACION"],
-        'USER': os.environ["BD_APROPIACION_USUARIO"],
-        'PASSWORD': os.environ["BD_APROPIACION_PASSWORD"],
-        'HOST': os.environ["BD_APROPIACION_HOST"],
-        'PORT': os.environ["BD_APROPIACION_PORT"],
+        'NAME': os.environ('BD_APROPIACION'),
+        'USER': os.environ('BD_APROPIACION_USUARIO'),
+        'PASSWORD': os.environ('BD_APROPIACION_PASSWORD'),
+        'HOST':os.environ('BD_APROPIACION_HOST'),
+        'PORT': os.environ('BD_APROPIACION_PORT'),
     }
 }
 
@@ -125,3 +125,8 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = ()
+
+
+IMAGEN='imagen'
+VIDEO='video'
+AUDIO='audio'
