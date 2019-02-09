@@ -49,7 +49,7 @@ class Multimedia(models.Model):
 
 
 class Imagen(Multimedia):
-    contenido = models.FileField(blank=True, null=True, upload_to='imagenes/%Y%m%D/', validators=[validar_imagen])
+    contenido = models.FileField(blank=True, null=True, upload_to='imagenes/', validators=[validar_imagen])
 
     def __str__(self):
         return self.titulo #+ '(' + self.fecha_creacion + ')'
@@ -60,14 +60,14 @@ class Reproducible(Multimedia):
 
 
 class Audio(Reproducible):
-    contenido = models.FileField(upload_to='audios/%Y%m%D/', validators=[validar_audio])
+    contenido = models.FileField(upload_to='audios/', validators=[validar_audio])
 
     def __str__(self):
         return self.titulo #+ '(' + self.fecha_creacion + ')'
 
 
 class Video(Reproducible):
-    contenido = models.FileField(upload_to='videos/%Y%m%D/', validators=[validar_video])
+    contenido = models.FileField(upload_to='videos/', validators=[validar_video])
 
     def __str__(self):
         return self.titulo #+ '(' + self.fecha_creacion + ')'
