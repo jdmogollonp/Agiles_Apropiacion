@@ -2,7 +2,9 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-
+from .validators import validar_imagen
+from .validators import validar_audio
+from .validators import validar_video
 
 class Categoria(models.Model):
     nombre = models.CharField(max_length=50)
@@ -47,7 +49,7 @@ class Multimedia(models.Model):
 
 
 class Imagen(Multimedia):
-    contenido = models.ImageField(blank=True, null=True, upload_to='imagenes/')
+    contenido = models.ImageField(blank=True, null=True, upload_to='archivos/imagenes/%Y%m%D/', validators=[validar_imagen])
 
     def __str__(self):
         return self.titulo #+ '(' + self.fecha_creacion + ')'
@@ -58,14 +60,14 @@ class Reproducible(Multimedia):
 
 
 class Audio(Reproducible):
-    contenido = models.FileField(upload_to='audios')
+    contenido = models.FileField(upload_to='archivos/audios/%Y%m%D/', validators=[validar_audio])
 
     def __str__(self):
         return self.titulo #+ '(' + self.fecha_creacion + ')'
 
 
 class Video(Reproducible):
-    contenido = models.FileField(upload_to='videos')
+    contenido = models.FileField(upload_to='archivos/videos/%Y%m%D/', validators=[validar_video])
 
     def __str__(self):
         return self.titulo #+ '(' + self.fecha_creacion + ')'

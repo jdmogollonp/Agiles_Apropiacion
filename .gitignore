@@ -124,4 +124,9 @@ dmypy.json
 
 # End of https://www.gitignore.io/api/python
 
-.idea
+.idea/Agiles_Apropiacion.iml
+.idea/encodings.xml
+.idea/misc.xml
+.idea/modules.xml
+.idea/vcs.xml
+.idea/workspace.xml
