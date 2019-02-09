@@ -2,8 +2,21 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="354861c8-7dc6-4dd4-b414-e1f5f90a50a3" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/archivos/recursos/music.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/galeria/migrations/0003_auto_20190209_1804.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/galeria/templates/registrarUsuario.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/galeria/validators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/apropiacion/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/apropiacion/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/galeria/templates/detalle.html" beforeDir="false" afterPath="$PROJECT_DIR$/galeria/templates/detalle.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apropiacion/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/apropiacion/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apropiacion/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/apropiacion/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galeria/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/galeria/admin.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galeria/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/galeria/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galeria/templates/lista_galeria.html" beforeDir="false" afterPath="$PROJECT_DIR$/galeria/templates/lista_galeria.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galeria/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/galeria/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/galeria/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/galeria/views.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,8 +32,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/galeria/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-334">
-              <caret line="42" column="77" selection-start-line="42" selection-start-column="77" selection-end-line="42" selection-end-column="77" />
+            <state relative-caret-position="-304">
+              <caret line="44" column="77" selection-start-line="44" selection-start-column="77" selection-end-line="44" selection-end-column="77" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -31,11 +44,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/galeria/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="348">
-              <caret line="38" column="100" selection-start-line="38" selection-start-column="100" selection-end-line="38" selection-end-column="100" />
-              <folding>
-                <element signature="e#0#35#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="543">
+              <caret line="51" column="100" selection-start-line="51" selection-start-column="100" selection-end-line="51" selection-end-column="100" />
             </state>
           </provider>
         </entry>
@@ -43,8 +53,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/galeria/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="135">
-              <caret line="9" column="65" selection-start-line="9" selection-start-column="65" selection-end-line="9" selection-end-column="65" />
+            <state relative-caret-position="180">
+              <caret line="12" column="65" selection-start-line="12" selection-start-column="65" selection-end-line="12" selection-end-column="65" />
               <folding>
                 <element signature="e#0#28#0" expanded="true" />
               </folding>
@@ -55,8 +65,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/apropiacion/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="21" column="15" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
+            <state relative-caret-position="147">
+              <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -64,8 +74,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/apropiacion/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="84" column="24" selection-start-line="84" selection-start-column="24" selection-end-line="84" selection-end-column="24" />
+            <state relative-caret-position="1317">
+              <caret line="140" column="15" lean-forward="true" selection-start-line="140" selection-start-column="15" selection-end-line="140" selection-end-column="15" />
             </state>
           </provider>
         </entry>
@@ -210,12 +220,12 @@
       <workItem from="1549574889358" duration="654000" />
       <workItem from="1549575574264" duration="7999000" />
       <workItem from="1549646060397" duration="242000" />
-      <workItem from="1549646386932" duration="12102000" />
+      <workItem from="1549646386932" duration="13008000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="21908000" />
+    <option name="totallyTimeSpent" value="22814000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="10" y="43" width="1260" height="701" extended-state="0" />
@@ -235,7 +245,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="Event Log" order="10" sideWeight="0.500821" side_tool="true" weight="0.41215107" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49917898" visible="true" weight="0.46305418" />
+      <window_info active="true" anchor="bottom" id="Terminal" order="11" sideWeight="0.49917898" visible="true" weight="0.37110016" />
       <window_info anchor="bottom" id="Python Console" order="12" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -273,15 +283,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apropiacion/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="21" column="15" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
+        <state relative-caret-position="147">
+          <caret line="23" column="15" selection-start-line="23" selection-start-column="15" selection-end-line="23" selection-end-column="15" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/galeria/urls.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="65" selection-start-line="9" selection-start-column="65" selection-end-line="9" selection-end-column="65" />
+        <state relative-caret-position="180">
+          <caret line="12" column="65" selection-start-line="12" selection-start-column="65" selection-end-line="12" selection-end-column="65" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
@@ -290,11 +300,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/galeria/views.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="348">
-          <caret line="38" column="100" selection-start-line="38" selection-start-column="100" selection-end-line="38" selection-end-column="100" />
-          <folding>
-            <element signature="e#0#35#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="543">
+          <caret line="51" column="100" selection-start-line="51" selection-start-column="100" selection-end-line="51" selection-end-column="100" />
         </state>
       </provider>
     </entry>
@@ -307,8 +314,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/galeria/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-334">
-          <caret line="42" column="77" selection-start-line="42" selection-start-column="77" selection-end-line="42" selection-end-column="77" />
+        <state relative-caret-position="-304">
+          <caret line="44" column="77" selection-start-line="44" selection-start-column="77" selection-end-line="44" selection-end-column="77" />
           <folding>
             <element signature="e#0#28#0" expanded="true" />
           </folding>
@@ -317,8 +324,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/apropiacion/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="84" column="24" selection-start-line="84" selection-start-column="24" selection-end-line="84" selection-end-column="24" />
+        <state relative-caret-position="1317">
+          <caret line="140" column="15" lean-forward="true" selection-start-line="140" selection-start-column="15" selection-end-line="140" selection-end-column="15" />
         </state>
       </provider>
     </entry>
