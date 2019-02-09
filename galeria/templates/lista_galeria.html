@@ -9,6 +9,9 @@
     <table border="1">
         <tr>
             <td>
+
+            </td>
+            <td>
                 Título
             </td>
             <td>
@@ -27,6 +30,9 @@
         {% if lstImagen %}
         {% for imagen in lstImagen %}
         <tr>
+            <td align="center">
+                <img src="/{{ imagen.contenido }}" alt="" height="50"/>
+            </td>
             <td>
                 {{ imagen.titulo }}
             </td>
@@ -47,6 +53,9 @@
         {% endif %}
         {% for audio in lstAudio %}
         <tr>
+            <td align="center">
+                <img src="/archivos/recursos/music.svg" alt="" height="50"/>
+            </td>
             <td>
                 {{ audio.titulo }}
             </td>
