@@ -82,6 +82,11 @@ DATABASES = {
         'PASSWORD': os.environ('BD_APROPIACION_PASSWORD'),
         'HOST':os.environ('BD_APROPIACION_HOST'),
         'PORT': os.environ('BD_APROPIACION_PORT'),
+       # 'NAME': 'galeria',
+       # 'USER': 'usgaleria',
+       # 'PASSWORD': 'galeria123!',
+       # 'HOST': 'localhost',
+       # 'PORT': '5432',
     }
 }
 
