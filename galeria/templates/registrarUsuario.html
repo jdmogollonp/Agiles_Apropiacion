@@ -31,7 +31,7 @@
         }
         $.ajax({
             type: "POST",
-            url: "http://apropiacion.herokuapp.com/galeria/agregarUsuario/",
+            url: "https://apropiacion.herokuapp.com/galeria/agregarUsuario/",
             data: JSON.stringify({
                 'nombre_usuario': $('#nombre_usuario').val(), 'nombre': $('#nombre').val(),
                 'apellido': $('#apellido').val(), 'contraseña': $('#contraseña').val(), 'correo_electronico': $('#correo_electronico').val()
@@ -40,7 +40,7 @@
             dataType: "json",
             success: function (data) {
                 alert("Usuario registrado: " + $('#nombre_usuario').val());
-                window.location = "http://apropiacion.herokuapp.com/galeria/";
+                window.location = "https://apropiacion.herokuapp.com/galeria/";
             },
             failure: function (errMsg) {
                 alert("Se presentó un error al adicionar el usuario");
