@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>REGISTRO USUARIO</title>
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
+</head>
+<body>
+<form method="post" action="" onsubmit="return enviarFormulario();">
+    <input id="nombre_usuario" name="nombre_usuario" type="text"
+           placeholder="Usuario"/><br/>
+    <input id="nombre" name="nombre" type="text"
+           placeholder="Nombre"/><br/>
+    <input id="apellido" name="apellido" type="text"
+           placeholder="Apellido"/><br/>
+    <input id="correo_electronico" name="Correo electronico" type="email"
+           placeholder="ejemplo@correo.com"/><br/>
+    <input id="contraseña" name="contraseña" type="password"/><br/>
+    <input id="contraseña2" name="contraseña2" type="password"/><br/>
+    <input id="enviar" name="send" type="submit" value="Registrar"/>
+    <a href="http://localhost:8000/galeria/">Cancelar</a>
+</form>
+</body>
+</html>
+
+<script>
+    function enviarFormulario() {
+        if ($('#password').val() != $('#password2').val()) {
+            alert('Las contraseñas no son iguales');
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "http://localhost:8000/galeria/agregarUsuario/",
+            data: JSON.stringify({
+                'nombre_usuario': $('#nombre_usuario').val(), 'nombre': $('#nombre').val(),
+                'apellido': $('#apellido').val(), 'contraseña': $('#contraseña').val(), 'correo_electronico': $('#correo_electronico').val()
+            }),
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (data) {
+                alert("Usuario registrado: " + $('#nombre_usuario').val());
+                window.location = "http://localhost:8000/galeria/";
+            },
+            failure: function (errMsg) {
+                alert("Se presentó un error al adicionar el usuario");
+            }
+        });
+        return false;
+    }
+</script>

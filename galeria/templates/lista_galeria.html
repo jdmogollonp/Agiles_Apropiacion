@@ -5,84 +5,85 @@
     <title>Galería Multimedia</title>
 </head>
 <body>
-    <h3>Galería Multimedia</h3>
-    <table border="1">
-        <tr>
-            <td>
-                Título
-            </td>
-            <td>
-                Autor
-            </td>
-            <td>
-                Fecha de Creación
-            </td>
-            <td>
-                Categoría
-            </td>
-            <td>
-                Tipo
-            </td>
-        </tr>
-        {% if lstImagen %}
-        {% for imagen in lstImagen %}
-        <tr>
-            <td>
-                {{ imagen.titulo }}
-            </td>
-            <td>
-                {{ imagen.autor }}
-            </td>
-            <td>
-                {{ imagen.fecha_creacion }}
-            </td>
-            <td>
-                {{ imagen.categoria }}
-            </td>
-            <td>
-                Imagen
-            </td>
-        </tr>
-        {% endfor %}
-        {% endif %}
-        {% for audio in lstAudio %}
-        <tr>
-            <td>
-                {{ audio.titulo }}
-            </td>
-            <td>
-                {{ audio.autor }}
-            </td>
-            <td>
-                {{ audio.fecha_creacion }}
-            </td>
-            <td>
-                {{ audio.categoria }}
-            </td>
-            <td>
-                Audio
-            </td>
-        </tr>
-        {% endfor %}
-        {% for video in lstVideo %}
-        <tr>
-            <td>
-                {{ video.titulo }}
-            </td>
-            <td>
-                {{ video.autor }}
-            </td>
-            <td>
-                {{ video.fecha_creacion }}
-            </td>
-            <td>
-                {{ video.categoria }}
-            </td>
-            <td>
-                Video
-            </td>
-        </tr>
-        {% endfor %}
-    </table>
+<li><a href="/galeria/registrarUsuario/">Registrar Usuario</a></li>
+<h3>Galería Multimedia</h3>
+<table border="1">
+    <tr>
+        <td>
+            Título
+        </td>
+        <td>
+            Autor
+        </td>
+        <td>
+            Fecha de Creación
+        </td>
+        <td>
+            Categoría
+        </td>
+        <td>
+            Tipo
+        </td>
+    </tr>
+    {% if lstImagen %}
+    {% for imagen in lstImagen %}
+    <tr>
+        <td>
+            {{ imagen.titulo }}
+        </td>
+        <td>
+            {{ imagen.autor }}
+        </td>
+        <td>
+            {{ imagen.fecha_creacion }}
+        </td>
+        <td>
+            {{ imagen.categoria }}
+        </td>
+        <td>
+            <img src="/{{ imagen.contenido }}" width="300px" height="300px"/>
+        </td>
+    </tr>
+    {% endfor %}
+    {% endif %}
+    {% for audio in lstAudio %}
+    <tr>
+        <td>
+            {{ audio.titulo }}
+        </td>
+        <td>
+            {{ audio.autor }}
+        </td>
+        <td>
+            {{ audio.fecha_creacion }}
+        </td>
+        <td>
+            {{ audio.categoria }}
+        </td>
+        <td>
+            Audio
+        </td>
+    </tr>
+    {% endfor %}
+    {% for video in lstVideo %}
+    <tr>
+        <td>
+            {{ video.titulo }}
+        </td>
+        <td>
+            {{ video.autor }}
+        </td>
+        <td>
+            {{ video.fecha_creacion }}
+        </td>
+        <td>
+            {{ video.categoria }}
+        </td>
+        <td>
+            Video
+        </td>
+    </tr>
+    {% endfor %}
+</table>
 </body>
 </html>

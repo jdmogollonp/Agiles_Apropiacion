@@ -16,7 +16,7 @@ class Perfil(models.Model):
     pais = models.CharField(max_length=20)
     ciudad = models.CharField(max_length=20)
     categorias_favoritas = models.ManyToManyField(Categoria)
-    foto = models.ImageField(upload_to='archivos/fotos_usuarios/')
+    foto = models.ImageField(upload_to='archivos/fotos_usuarios')
 
     def __str__(self):
         return self.usuario.username
@@ -47,7 +47,7 @@ class Multimedia(models.Model):
 
 
 class Imagen(Multimedia):
-    contenido = models.FileField(blank=True, null=True, upload_to='archivos/imagenes/%Y%m%D/')
+    contenido = models.ImageField(blank=True, null=True, upload_to='imagenes/')
 
     def __str__(self):
         return self.titulo #+ '(' + self.fecha_creacion + ')'
@@ -58,14 +58,14 @@ class Reproducible(Multimedia):
 
 
 class Audio(Reproducible):
-    contenido = models.FileField(upload_to='archivos/audios/%Y%m%D/')
+    contenido = models.FileField(upload_to='audios')
 
     def __str__(self):
         return self.titulo #+ '(' + self.fecha_creacion + ')'
 
 
 class Video(Reproducible):
-    contenido = models.FileField(upload_to='archivos/videos/%Y%m%D/')
+    contenido = models.FileField(upload_to='videos')
 
     def __str__(self):
         return self.titulo #+ '(' + self.fecha_creacion + ')'
