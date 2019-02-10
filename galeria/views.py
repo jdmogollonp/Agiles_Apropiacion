@@ -20,6 +20,7 @@ def index(request):
 
 
 def detalle(request, tipo, idbd):
+    iUrl = None
     if tipo==settings.IMAGEN:
         multimedia=get_object_or_404(Imagen,id=idbd)
         iUrl=multimedia.contenido.url
