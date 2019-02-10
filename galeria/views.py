@@ -1,12 +1,13 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from .models import Imagen, Audio, Video
 import json
 from django.core import serializers
-from django.http import HttpResponse
+from django.http import HttpResponse, JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.conf import settings
+from django.contrib.auth import authenticate, login, logout
 
 
 @login_required(login_url='/galeria/login_user/')
@@ -20,6 +21,7 @@ def index(request):
 
 
 def detalle(request, tipo, idbd):
+    iUrl = None
     if tipo==settings.IMAGEN:
         multimedia=get_object_or_404(Imagen,id=idbd)
         iUrl=multimedia.contenido.url
@@ -76,7 +78,7 @@ def login_user(request):
 @csrf_exempt
 def logout_view(request):
     logout(request)
-    return JsonResponse({"message": 'ok'})
+    return redirect("/")
 
 
 @csrf_exempt
