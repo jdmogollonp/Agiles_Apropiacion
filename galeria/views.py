@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404
 from .models import Imagen, Audio, Video
 import json
@@ -7,9 +8,8 @@ from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.conf import settings
 
-# Create your views here.
 
-
+@login_required(login_url='/galeria/login_user/')
 def index(request):
     lstImagen = Imagen.objects.all()
     lstAudio = Audio.objects.all()
@@ -69,3 +69,27 @@ def agregar_usuario(request):
         user_model.save()
     return HttpResponse(serializers.serialize('json', [user_model]))
 
+
+def login_user(request):
+    return render(request, "login.html")
+
+
+@csrf_exempt
+def logout_view(request):
+    logout(request)
+    return JsonResponse({"message": 'ok'})
+
+
+@csrf_exempt
+def login_view(request):
+    if request.method == 'POST':
+        jsonUser = json.loads(request.body)
+        username = jsonUser['username']
+        password = jsonUser['password']
+        user = authenticate(username=username, password=password)
+        if user is not None:
+            login(request, user)
+            message = "ok"
+        else:
+            message = 'Nombre de usuario o password incorrectos'
+        return JsonResponse({"message": message})
