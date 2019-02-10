@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+
+</head>
+<body>
+<div>
+    {% if tipo == "imagen" %}
+        <img src="{{ imagenUrl }}" alt="{{ titulo }}" width="300px" height="300px"/>
+    {% endif %}
+    {% if tipo == "audio" %}
+    {% endif %}
+    {% if video %}
+    {% endif %}
+</div>
+<div>
+    <table border="1">
+        <tr>
+            <td>Título</td>
+            <td>{{ titulo }}</td>
+        <tr/>
+        <tr>
+            <td>Autor</td>
+            <td>{{ autor }}</td>
+        <tr/>
+        <tr>
+            <td>Fecha de creación</td>
+            <td>{{ fecha_creacion }}</td>
+        <tr/>
+        <tr>
+            <td>Categoría</td>
+            <td>{{ categoria }}</td>
+        <tr/>
+        <tr>
+            <td>Usuario</td>
+            <td>{{ usuario }}</td>
+        <tr/>
+        <tr>
+            <td>Ciudad</td>
+            <td>{{ ciudad }}</td>
+        <tr/>
+        <tr>
+            <td>País</td>
+            <td>{{ pais }}</td>
+        <tr/>
+    </table>
+</div>
+<div>
+    <h3>Clips recomendados</h3>
+</div>
+<div>
+    <h3>Agregar clip</h3>
+</div>
+</body>
+</html>

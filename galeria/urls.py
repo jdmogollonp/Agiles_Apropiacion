@@ -2,12 +2,19 @@ from django.urls import path
 from django.conf import settings
 from django.conf.urls.static import static
 
+
 from . import views
+
+
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('<str:tipo>/<int:idbd>',views.detalle,name='detalleGal'),
     path('agregarUsuario/', views.agregar_usuario, name='agregarUsuario'),
     path('registrarUsuario/', views.registrar_usuario, name='registrarUsuario'),
+    path('login_user/', views.login_user, name='login_user'),
+    path('login_view/', views.login_view, name='login'),
+    path('logout_view/', views.logout_view, name='logout'),
 ]
 
 if settings.DEBUG:
