@@ -30,6 +30,9 @@
         <td>
             Tipo
         </td>
+        <td>
+            ...
+        </td>
     </tr>
     </thead>
     <tbody>
@@ -54,6 +57,9 @@
             <td>
                 Imagen
             </td>
+            <td>
+                <a href="{% url "detalleGal" tipo='imagen' idbd=imagen.id %}" class="btn btn-white btn-sm">Ver Detalles</a>
+            </td>
         </tr>
         {% endfor %}
         {% endif %}
@@ -76,6 +82,9 @@
             </td>
             <td>
                 Audio
+            </td>
+            <td>
+                <a href="{% url "detalleGal" tipo='audio' idbd=audio.id %}" class="btn btn-white btn-sm">Ver Detalles</a>
             </td>
         </tr>
         {% endfor %}
@@ -100,6 +109,9 @@
             </td>
             <td>
                 Video
+            </td>
+            <td>
+                <a href="{% url "detalleGal" tipo='video' idbd=video.id %}" class="btn btn-white btn-sm">Ver Detalles</a>
             </td>
         </tr>
         {% endfor %}

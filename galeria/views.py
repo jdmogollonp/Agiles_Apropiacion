@@ -23,11 +23,10 @@ def detalle(request, tipo, idbd):
     if tipo==settings.IMAGEN:
         multimedia=get_object_or_404(Imagen,id=idbd)
         iUrl=multimedia.contenido.url
-        print('contenido')
-        print(multimedia.contenido)
 
     if tipo==settings.VIDEO:
         multimedia=get_object_or_404(Video,id=idbd)
+        iUrl=multimedia.contenido.url
 
     if tipo==settings.AUDIO:
         multimedia=get_object_or_404(Audio,id=idbd)

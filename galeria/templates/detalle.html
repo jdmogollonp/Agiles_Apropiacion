@@ -14,7 +14,10 @@
             <source src="{{ iUrl }}"/>
         </audio>
     {% endif %}
-    {% if video %}
+    {% if  tipo == "video" %}
+    <video controls>
+        <source src="{{ iUrl }}">
+      </video>
     {% endif %}
 </div>
 <div>
