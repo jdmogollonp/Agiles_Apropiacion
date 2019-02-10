@@ -17,7 +17,7 @@
       <b>{{ imagen.titulo }}</b>
       <span>Por: {{ imagen.autor }}</span>
       <span>{{ imagen.fecha_creacion | date:'Y' }}</span>
-      <a href="{% url 'detalleGal' 'imagen' imagen.id %}">Ver detalle</a>
+      <a href="{% url 'detalleGal' tipo='imagen' idbd=imagen.id %}">Ver detalle</a>
     </div>
     {% endfor %}
     {% for audio in lstAudio %}
@@ -26,7 +26,7 @@
       <b>{{ audio.titulo }}</b>
       <span>Por: {{ audio.autor }}</span>
       <span>{{ audio.fecha_creacion | date:'Y' }}</span>
-      <a href="{% url 'detalleGal' 'audio' audio.id %}">Ver detalle</a>
+      <a href="{% url 'detalleGal' tipo='audio' idbd=audio.id %}">Ver detalle</a>
     </div>
     {% endfor %}
     {% for video in lstVideo %}
@@ -37,7 +37,7 @@
       <b>{{ video.titulo }}</b>
       <span>Por: {{ video.autor }}</span>
       <span>{{ video.fecha_creacion | date:'Y' }}</span>
-      <a href="{% url 'detalleGal' 'video' video.id %}">Ver detalle</a>
+      <a href="{% url 'detalleGal' tipo='video' idbd=video.id %}">Ver detalle</a>
     </div>
     {% endfor %}
   </div>
