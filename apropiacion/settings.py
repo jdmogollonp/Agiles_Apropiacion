@@ -84,11 +84,7 @@ DATABASES = {
         'PASSWORD': os.environ["BD_APROPIACION_PASSWORD"],
         'HOST': os.environ["BD_APROPIACION_HOST"],
         'PORT': os.environ["BD_APROPIACION_PORT"],
-       # 'NAME': 'galeria',
-       # 'USER': 'usgaleria',
-       # 'PASSWORD': 'galeria123!',
-       # 'HOST': 'localhost',
-       # 'PORT': '5432',
+
     }
 }
 
@@ -132,7 +128,7 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/archivos/'
-MEDIA_ROOT = os.path.join(BASE_DIR, '')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'archivos/')
 
 STATICFILES_DIRS = ()
 

@@ -18,6 +18,6 @@ def validar_video(value):
     import os
     from django.core.exceptions import ValidationError
     extension = os.path.splitext(value.name)[1]
-    permitidas = ['.avi', '.mpeg', '.mov', '.wmv', '.rm', '.flv', '.mp4']
+    permitidas = ['.avi', '.mpeg', '.mov', '.wmv', '.rm', '.flv', '.mp4', '.mkv']
     if not extension.lower() in permitidas:
         raise ValidationError(u'No es un video.')
