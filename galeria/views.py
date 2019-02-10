@@ -22,7 +22,7 @@ def index(request):
 def detalle(request, tipo, idbd):
     if tipo==settings.IMAGEN:
         multimedia=get_object_or_404(Imagen,id=idbd)
-        imagenUrl=multimedia.contenido.url
+        iUrl=multimedia.contenido.url
         print('contenido')
         print(multimedia.contenido)
 
@@ -31,7 +31,7 @@ def detalle(request, tipo, idbd):
 
     if tipo==settings.AUDIO:
         multimedia=get_object_or_404(Audio,id=idbd)
-        audioUrl=multimedia.contenido.url
+        iUrl=multimedia.contenido.url
 
     titulo=multimedia.titulo
     autor=multimedia.autor
@@ -42,7 +42,7 @@ def detalle(request, tipo, idbd):
     pais=multimedia.pais
 
     context={'tipo':tipo,'titulo':titulo,'autor':autor,'fecha_creacion':fecha_creacion,'categoria':categoria,
-             'usuario':usuario,'ciudad':ciudad,'pais':pais,'imagenUrl':imagenUrl}
+             'usuario':usuario,'ciudad':ciudad,'pais':pais,'iUrl':iUrl}
 
     return render(request, 'detalle.html',context)
 
