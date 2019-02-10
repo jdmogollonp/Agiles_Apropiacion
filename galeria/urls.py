@@ -9,6 +9,7 @@ from . import views
 
 urlpatterns = [
     path('', views.index, name='index'),
+    path('/galeria', views.index, name='galeria'),
     path('<str:tipo>/<int:idbd>',views.detalle,name='detalleGal'),
     path('agregarUsuario/', views.agregar_usuario, name='agregarUsuario'),
     path('registrarUsuario/', views.registrar_usuario, name='registrarUsuario'),
