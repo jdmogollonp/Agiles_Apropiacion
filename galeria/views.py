@@ -42,7 +42,7 @@ def detalle(request, tipo, idbd):
     pais=multimedia.pais
 
     context={'tipo':tipo,'titulo':titulo,'autor':autor,'fecha_creacion':fecha_creacion,'categoria':categoria,
-             'usuario':usuario,'ciudad':ciudad,'pais':pais,'imagenUrl':imagenUrl,'audioUrl':audioUrl}
+             'usuario':usuario,'ciudad':ciudad,'pais':pais,'imagenUrl':imagenUrl}
 
     return render(request, 'detalle.html',context)
 
