@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Galería Multimedia</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 </head>
 <body>
 <li><a href="/galeria/registrarUsuario/">Registrar Usuario</a></li>
 <li><a href="/galeria/logout_view/">Logout</a></li>
 <h3>Galería Multimedia</h3>
-<table border="1">
+<table class="table table-hover">
+  <thead style="background-color: #bbccdd; font-weight: bold">
     <tr>
         <td>
 
@@ -29,74 +31,79 @@
             Tipo
         </td>
     </tr>
-    {% if lstImagen %}
-    {% for imagen in lstImagen %}
-    <tr>
-        <td align="center">
-            <img src="/archivos/{{ imagen.contenido }}" alt="" height="50"/>
-        </td>
-        <td>
-            {{ imagen.titulo }}
-        </td>
-        <td>
-            {{ imagen.autor }}
-        </td>
-        <td>
-            {{ imagen.fecha_creacion }}
-        </td>
-        <td>
-            {{ imagen.categoria }}
-        </td>
-        <td>
-            Imagen
-        </td>
-    </tr>
-    {% endfor %}
-    {% endif %}
-    {% for audio in lstAudio %}
-    <tr>
-        <td align="center">
-            <img src="/archivos/recursos/music.svg" alt="" height="50"/>
-        </td>
-        <td>
-            {{ audio.titulo }}
-        </td>
-        <td>
-            {{ audio.autor }}
-        </td>
-        <td>
-            {{ audio.fecha_creacion }}
-        </td>
-        <td>
-            {{ audio.categoria }}
-        </td>
-        <td>
-            Audio
-        </td>
-    </tr>
-    {% endfor %}
-    {% for video in lstVideo %}
-    <tr>
-        <td align="center">
-
-        </td>
-        <td>
-            {{ video.titulo }}
-        </td>
-        <td>
-            {{ video.autor }}
-        </td>
-        <td>
-            {{ video.fecha_creacion }}
-        </td>
-        <td>
-            {{ video.categoria }}
-        </td>
-        <td>
-            Video
-        </td>
-    </tr>
-    {% endfor %}
+    </thead>
+    <tbody>
+        {% if lstImagen %}
+        {% for imagen in lstImagen %}
+        <tr>
+            <td align="center">
+                <img src="/archivos/{{ imagen.contenido }}" alt="" height="70"/>
+            </td>
+            <td>
+                {{ imagen.titulo }}
+            </td>
+            <td>
+                {{ imagen.autor }}
+            </td>
+            <td>
+                {{ imagen.fecha_creacion }}
+            </td>
+            <td>
+                {{ imagen.categoria }}
+            </td>
+            <td>
+                Imagen
+            </td>
+        </tr>
+        {% endfor %}
+        {% endif %}
+        {% for audio in lstAudio %}
+        <tr>
+            <td align="center">
+                <img src="/archivos/recursos/music.svg" alt="" height="70"/>
+            </td>
+            <td>
+                {{ audio.titulo }}
+            </td>
+            <td>
+                {{ audio.autor }}
+            </td>
+            <td>
+                {{ audio.fecha_creacion }}
+            </td>
+            <td>
+                {{ audio.categoria }}
+            </td>
+            <td>
+                Audio
+            </td>
+        </tr>
+        {% endfor %}
+        {% for video in lstVideo %}
+        <tr>
+            <td align="center">
+                <video height="70" controls>
+                  <source src="/archivos/{{ video.contenido }}">
+                </video>
+            </td>
+            <td>
+                {{ video.titulo }}
+            </td>
+            <td>
+                {{ video.autor }}
+            </td>
+            <td>
+                {{ video.fecha_creacion }}
+            </td>
+            <td>
+                {{ video.categoria }}
+            </td>
+            <td>
+                Video
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 </body>
 </html>
