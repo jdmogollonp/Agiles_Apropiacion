@@ -7,11 +7,17 @@
 <body>
 <div>
     {% if tipo == "imagen" %}
-        <img src="{{ imagenUrl }}" alt="{{ titulo }}" width="300px" height="300px"/>
+        <img src="{{ iUrl }}" alt="{{ titulo }}" width="500px" height="300px"/>
     {% endif %}
     {% if tipo == "audio" %}
+        <audio controls autoplay>
+            <source src="{{ iUrl }}"/>
+        </audio>
     {% endif %}
-    {% if video %}
+    {% if  tipo == "video" %}
+    <video controls>
+        <source src="{{ iUrl }}">
+      </video>
     {% endif %}
 </div>
 <div>
