@@ -2,45 +2,67 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>REGISTRO USUARIO</title>
+    <title>USUARIO</title>
     <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
-<form method="post" action="" onsubmit="return enviarFormulario();">
-    <input id="nombre_usuario" name="nombre_usuario" type="text"
-           placeholder="Usuario"/><br/>
-    <input id="nombre" name="nombre" type="text"
-           placeholder="Nombre"/><br/>
-    <input id="apellido" name="apellido" type="text"
-           placeholder="Apellido"/><br/>
-    <input id="correo_electronico" name="Correo electronico" type="email"
-           placeholder="ejemplo@correo.com"/><br/>
-    <input id="contraseña" name="contraseña" type="password"/><br/>
-    <input id="contraseña2" name="contraseña2" type="password"/><br/>
-    <input id="enviar" name="send" type="submit" value="Registrar"/>
-    <a href="http://apropiacion.herokuapp.com/galeria/">Cancelar</a>
-</form>
+<div>
+    {% if id is None %}
+        <form method="post" action="" onsubmit="return enviarFormulario();">
+            <input id="nombre_usuario" name="nombre_usuario" type="text"
+                   placeholder="Usuario"/><br/>
+            <input id="nombre" name="nombre" type="text"
+                   placeholder="Nombre"/><br/>
+            <input id="apellido" name="apellido" type="text"
+                   placeholder="Apellido"/><br/>
+            <input id="correo_electronico" name="Correo electronico" type="email"
+                   placeholder="ejemplo@correo.com"/><br/>
+            <input id="contrasenia" name="contrasenia" type="password"/><br/>
+            <input id="contrasenia2" name="contrasenia2" type="password"/><br/>
+            <input id="enviar" name="send" type="submit" value="Registrar"/>
+            <a href="/galeria/">Cancelar</a>
+        </form>
+    {% else %}
+        <form method="post" action="" onsubmit="return enviarFormulario();">
+            <input id="nombre" name="nombre" type="text"
+                   value="{{ nombre }}"/><br/>
+            <input id="apellido" name="apellido" type="text"
+                   value="{{ apellido }}"/><br/>
+            <input id="correo_electronico" name="Correo electronico" type="email"
+                   value="{{ correo_electronico }}"/><br/>
+            <input id="contrasenia" name="contrasenia" type="password"/><br/>
+            <input id="contrasenia2" name="contrasenia2" type="password"/><br/>
+            <input id="enviar" name="send" type="submit" value="Editar"/>
+            <a href="/galeria/">Cancelar</a>
+        </form>
+    {% endif %}
+</div>
 </body>
 </html>
 
 <script>
     function enviarFormulario() {
-        if ($('#password').val() != $('#password2').val()) {
+        console.log('entrando al script')
+        if ($('#contrasenia').val() != $('#contrasenia2').val()) {
             alert('Las contraseñas no son iguales');
             return false;
         }
         $.ajax({
             type: "POST",
-            url: "https://apropiacion.herokuapp.com/galeria/agregarUsuario/",
+            url: "/galeria/agregarUsuario/",
             data: JSON.stringify({
-                'nombre_usuario': $('#nombre_usuario').val(), 'nombre': $('#nombre').val(),
-                'apellido': $('#apellido').val(), 'contraseña': $('#contraseña').val(), 'correo_electronico': $('#correo_electronico').val()
+                'id': '{{ id }}',
+                'nombre_usuario': $('#nombre_usuario').val(),
+                'nombre': $('#nombre').val(),
+                'apellido': $('#apellido').val(),
+                'contraseña': $('#contrasenia').val(),
+                'correo_electronico': $('#correo_electronico').val()
             }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function (data) {
-                alert("Usuario registrado: " + $('#nombre_usuario').val());
-                window.location = "https://apropiacion.herokuapp.com/galeria/";
+                alert("Usuario registrado: " + $('#nombre').val());
+                window.location = "/galeria/";
             },
             failure: function (errMsg) {
                 alert("Se presentó un error al adicionar el usuario");
