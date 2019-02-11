@@ -1,45 +1,46 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Galería Multimedia</title>
-  <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">-->
+    <meta charset="UTF-8">
+    <title>Galería Multimedia</title>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">-->
 </head>
 <body>
-  <li><a href="/galeria/registrarUsuario/">Registrar Usuario</a></li>
-  <li><a href="/galeria/logout_view/">Logout</a></li>
-  <h3>Galería Multimedia</h3>
+<li><a href="{% url 'editarUsuario' id=user.id %}">Editar Usuario</a></li>
+<li><a href="/galeria/logout_view/">Logout</a></li>
+<li><a href="{% url 'home' %}">Regresar</a></li>
+<h3>Galería Multimedia</h3>
 
-  <div style="display: flex; flex-wrap: wrap;">
+<div style="display: flex; flex-wrap: wrap;">
     {% for imagen in lstImagen %}
-    <div style="margin: 0.5rem; padding: 0.5rem; display: flex; flex-direction: column; border-style: groove;">
-      <img src="/archivos/{{ imagen.contenido }}" alt="" height="150"/>
-      <b>{{ imagen.titulo }}</b>
-      <span>Por: {{ imagen.autor }}</span>
-      <span>{{ imagen.fecha_creacion | date:'Y' }}</span>
-      <a href="{% url 'detalleGal' tipo='imagen' idbd=imagen.id %}">Ver detalle</a>
-    </div>
+        <div style="margin: 0.5rem; padding: 0.5rem; display: flex; flex-direction: column; border-style: groove;">
+            <img src="/archivos/{{ imagen.contenido }}" alt="" height="150"/>
+            <b>{{ imagen.titulo }}</b>
+            <span>Por: {{ imagen.autor }}</span>
+            <span>{{ imagen.fecha_creacion | date:'Y' }}</span>
+            <a href="{% url 'detalleGal' tipo='imagen' idbd=imagen.id %}">Ver detalle</a>
+        </div>
     {% endfor %}
     {% for audio in lstAudio %}
-    <div style="margin: 0.5rem; padding: 0.5rem; display: flex; flex-direction: column; border-style: groove;">
-      <img src="/archivos/recursos/music.svg" alt="" height="150"/>
-      <b>{{ audio.titulo }}</b>
-      <span>Por: {{ audio.autor }}</span>
-      <span>{{ audio.fecha_creacion | date:'Y' }}</span>
-      <a href="{% url 'detalleGal' tipo='audio' idbd=audio.id %}">Ver detalle</a>
-    </div>
+        <div style="margin: 0.5rem; padding: 0.5rem; display: flex; flex-direction: column; border-style: groove;">
+            <img src="/archivos/recursos/music.svg" alt="" height="150"/>
+            <b>{{ audio.titulo }}</b>
+            <span>Por: {{ audio.autor }}</span>
+            <span>{{ audio.fecha_creacion | date:'Y' }}</span>
+            <a href="{% url 'detalleGal' tipo='audio' idbd=audio.id %}">Ver detalle</a>
+        </div>
     {% endfor %}
     {% for video in lstVideo %}
-    <div style="margin: 0.5rem; padding: 0.5rem; display: flex; flex-direction: column; border-style: groove;">
-      <video height="150" controls>
-        <source src="/archivos/{{ video.contenido }}">
-      </video>
-      <b>{{ video.titulo }}</b>
-      <span>Por: {{ video.autor }}</span>
-      <span>{{ video.fecha_creacion | date:'Y' }}</span>
-      <a href="{% url 'detalleGal' tipo='video' idbd=video.id %}">Ver detalle</a>
-    </div>
+        <div style="margin: 0.5rem; padding: 0.5rem; display: flex; flex-direction: column; border-style: groove;">
+            <video height="150" controls>
+                <source src="/archivos/{{ video.contenido }}">
+            </video>
+            <b>{{ video.titulo }}</b>
+            <span>Por: {{ video.autor }}</span>
+            <span>{{ video.fecha_creacion | date:'Y' }}</span>
+            <a href="{% url 'detalleGal' tipo='video' idbd=video.id %}">Ver detalle</a>
+        </div>
     {% endfor %}
-  </div>
+</div>
 </body>
 </html>
