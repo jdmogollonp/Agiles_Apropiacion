@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 <body>
 <div>
@@ -10,12 +10,12 @@
         <img src="{{ iUrl }}" alt="{{ titulo }}" width="500px" height="300px"/>
     {% endif %}
     {% if tipo == "audio" %}
-        <audio controls autoplay>
-            <source src="{{ iUrl }}"/>
+        <audio controls autoplay id="playerElm" controls>
+            <source src="{{ iUrl }}" type="video/mp4"/>
         </audio>
     {% endif %}
     {% if  tipo == "video" %}
-    <video controls>
+    <video controls id="playerElm">
         <source src="{{ iUrl }}">
       </video>
     {% endif %}
@@ -52,8 +52,18 @@
         <tr/>
     </table>
 </div>
+
+{% if tipo == "audio" or tipo == "video" %}
 <div>
     <h3>Clips recomendados</h3>
+    <ul>
+    {% for clip in clips %}
+        <li>
+            {{clip.nombre}}
+            <i style="font-size:24px; cursor: pointer" class="fa" onclick="playVideo({{clip.segundo_inicio}},{{clip.segundo_fin}})">&#xf04b;</i>
+        </li>
+    {% endfor %}
+    </ul>
 </div>
 <div>
     <h3>Agregar clip</h3>
@@ -61,5 +71,33 @@
 <div>
     <a href="{% url 'index' %}">Regresar</a>
 </div>
+{% endif %}
+
 </body>
 </html>
+
+<script>
+        function playVideo(starttime,endtime) {
+            var video = document.getElementById('playerElm');
+            console.log(starttime,endtime);
+            //handler should be bound first
+            video.addEventListener("timeupdate", function() {
+                console.log(this.currentTime)
+            if (this.currentTime >= endtime) {
+                    this.pause();
+                }
+            }, false);
+
+            //suppose that video src has been already set properly
+            video.load();
+            video.play();
+
+            try {
+                video.currentTime = 10;
+            } catch (ex) {
+                console.log("error")
+            }
+
+            //must call this otherwise can't seek on some browsers, e.g. Firefox 4
+        }
+    </script>

@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, get_object_or_404, redirect
-from .models import Imagen, Audio, Video
+from .models import Imagen, Audio, Video, Clip
 import json
 from django.core import serializers
 from django.http import HttpResponse, JsonResponse
@@ -43,8 +43,11 @@ def detalle(request, tipo, idbd):
     ciudad = multimedia.ciudad
     pais = multimedia.pais
 
+    if tipo == "audio" or tipo == "video" :
+        clips = Clip.objects.filter(referencia = idbd)
+    
     context = {'tipo': tipo, 'titulo': titulo, 'autor': autor, 'fecha_creacion': fecha_creacion, 'categoria': categoria,
-             'usuario':usuario,'ciudad':ciudad,'pais':pais,'iUrl':iUrl}
+             'usuario':usuario,'ciudad':ciudad,'pais':pais,'iUrl':iUrl, 'clips': clips}
 
     return render(request, 'detalle.html', context)
 
