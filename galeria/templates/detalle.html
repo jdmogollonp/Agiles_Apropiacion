@@ -79,10 +79,10 @@
 <script>
         function playVideo(starttime,endtime) {
             var video = document.getElementById('playerElm');
-            console.log("1.1");
+
             //handler should be bound first
             video.addEventListener("timeupdate", function() {
-                console.log(this.currentTime)
+                
             if (this.currentTime >= endtime) {
                     this.pause();
                 }
@@ -94,7 +94,7 @@
             video.play();
 
             try {
-                video.currentTime = 10;
+                video.currentTime = starttime;
             } catch (ex) {
                 console.log(ex)
             }
