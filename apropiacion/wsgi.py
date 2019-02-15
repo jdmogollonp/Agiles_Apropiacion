@@ -11,10 +11,16 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 from whitenoise.django import DjangoWhiteNoise
+from dj_static import Cling, MediaCling
+from static_ranges import Ranges
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'apropiacion.settings')
+
+
+
 
 application = get_wsgi_application()
 
 # Use whitenoise package to serve static files on Heroku
 application = DjangoWhiteNoise(application)
+application = Ranges(Cling(MediaCling(application)))

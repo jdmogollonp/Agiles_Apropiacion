@@ -10,12 +10,12 @@
         <img src="{{ iUrl }}" alt="{{ titulo }}" width="500px" height="300px"/>
     {% endif %}
     {% if tipo == "audio" %}
-        <audio controls autoplay id="playerElm" controls>
+        <audio controls autoplay id="playerElm" controls='false'>
             <source src="{{ iUrl }}" type="video/mp4"/>
         </audio>
     {% endif %}
     {% if  tipo == "video" %}
-    <video controls id="playerElm">
+    <video controls id="playerElm" Accept-Ranges>
         <source src="{{ iUrl }}">
       </video>
     {% endif %}
@@ -79,7 +79,7 @@
 <script>
         function playVideo(starttime,endtime) {
             var video = document.getElementById('playerElm');
-            console.log(starttime,endtime);
+            console.log("1.1");
             //handler should be bound first
             video.addEventListener("timeupdate", function() {
                 console.log(this.currentTime)
@@ -89,13 +89,14 @@
             }, false);
 
             //suppose that video src has been already set properly
+            
             video.load();
             video.play();
 
             try {
                 video.currentTime = 10;
             } catch (ex) {
-                console.log("error")
+                console.log(ex)
             }
 
             //must call this otherwise can't seek on some browsers, e.g. Firefox 4
