@@ -8,5 +8,3 @@ admin.site.register(Imagen)
 admin.site.register(Audio)
 admin.site.register(Video)
 admin.site.register(Clip)
-
-

@@ -5,21 +5,29 @@
     <title>Proyecto de apropiación</title>
 </head>
 <body>
-    <h1>Hello, este es el proyecto de apropiación para la clase de "Procesos ágiles de desarrollo de software"</h1>
-    <p>Los integrantes son:</p>
-    <ul>
-        <li>Sergio Eduardo Cárdenas</li>
-        <li>Nicolas Jiménez</li>
-        <li>Juan Sebastián Méndez</li>
-        <li>Juan Camilo Piza</li>
-        <li>Ingrid Dayana Romero</li>
-        <li>Jairo Ruano</li>
-        <li>Juan David Mogollón</li>
-    </ul>
-    <p>Links importantes del proyecto:</p>
-    <ul>
-        <li><a href="/galeria">Galeria</a></li>
-        <li><a href="/admin">Admin</a></li>
-    </ul>
+<h1>Hello, este es el proyecto de apropiación para la clase de "Procesos ágiles de desarrollo de software"</h1>
+<p>Los integrantes son:</p>
+<ul>
+    <li>Sergio Eduardo Cárdenas</li>
+    <li>Nicolas Jiménez</li>
+    <li>Juan Sebastián Méndez</li>
+    <li>Juan Camilo Piza</li>
+    <li>Ingrid Dayana Romero</li>
+    <li>Jairo Ruano</li>
+    <li>Juan David Mogollón</li>
+</ul>
+<p>Links importantes del proyecto:</p>
+<ul>
+    <li><a href="/galeria">Galeria</a></li>
+    <li><a href="/admin">Admin</a></li>
+    {% if user.is_authenticated %}
+        <li>Bienvenido {{ user.username }}</li>
+        <li><a href="/galeria/logout_view/">Logout</a></li>
+        <li><a href="{% url 'editarUsuario' id=user.id %}">Editar Usuario</a></li>
+    {% else %}
+        <li><a href="/galeria/login_user/">Inciar Sesión</a></li>
+        <li><a href="/galeria/registrarUsuario/">Registrar Usuario</a></li>
+    {% endif %}
+</ul>
 </body>
 </html>
