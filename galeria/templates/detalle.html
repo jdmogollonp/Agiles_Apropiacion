@@ -79,10 +79,11 @@
     <input type="submit" value="Agregar"><br/>
     </form>
 </div>
+{% endif %}
+
 <div>
     <a href="{% url 'index' %}">Regresar</a>
 </div>
-{% endif %}
 
 </body>
 </html>
@@ -100,28 +101,37 @@
             });
         }
 
+        var endTimeVideo = null;
+
+        function puseVideo() {    
+                if(endTimeVideo == null) return;
+                if (this.currentTime >= endTimeVideo) {
+                    this.removeEventListener("timeupdate",puseVideo);
+                    this.pause();
+                    endTimeVideo = null;
+                }
+            }
+
         function playVideo(starttime,endtime) {
             var video = document.getElementById('playerElm');
-
             //handler should be bound first
-            video.addEventListener("timeupdate", function() {
-                
-            if (this.currentTime >= endtime) {
-                    this.pause();
-                }
-            }, false);
-
+            endTimeVideo = endtime;
+            video.removeEventListener("timeupdate",puseVideo);
+            video.addEventListener("timeupdate",puseVideo , false);
             //suppose that video src has been already set properly
             
             video.load();
-            video.play();
+
+            const playPromise = video.play();
+            if (playPromise !== null){
+                playPromise.catch(() => { video.play(); })
+            }
 
             try {
                 video.currentTime = starttime;
             } catch (ex) {
                 console.log(ex)
             }
-
             //must call this otherwise can't seek on some browsers, e.g. Firefox 4
         }
     </script>
