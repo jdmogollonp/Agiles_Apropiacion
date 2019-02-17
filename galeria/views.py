@@ -1,14 +1,16 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Imagen, Audio, Video, Clip
 import json
-from django.core import serializers
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, HttpResponseBadRequest
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.models import User
+
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.core import serializers
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, HttpResponseBadRequest
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+
+from .models import Imagen, Audio, Video, Clip
 
 
 @csrf_exempt
@@ -18,11 +20,26 @@ def index(request):
     lstVideo = list(Video.objects.all())
     allObjects = lstImagen + lstAudio + lstVideo
     print(lstImagen)
-    return HttpResponse(serializers.serialize('json', allObjects))
+    return HttpResponse(serializers.serialize('json', lstImagen))
 
+def obtenerImagen(request):
+    lstImagen = list(Imagen.objects.all())
+    return HttpResponse(serializers.serialize('json', lstImagen))
+
+def obtenerAudio(request):
+    lstAudio = list(Audio.objects.all())
+    return HttpResponse(serializers.serialize('json', lstAudio))
+
+def obtenerVideo(request):
+    lstVideo = list(Video.objects.all())
+    #obj = json.encoder(lstVideo)
+    return HttpResponse(serializers.serialize('json', lstVideo))
 
 @csrf_exempt
 def viewImages(request):
+    lstImagen = list(Imagen.objects.all())
+    lstAudio = list(Audio.objects.all())
+    lstVideo = list(Video.objects.all())
     return render(request, "lista_galeria.html")
 
 

@@ -19,6 +19,9 @@ urlpatterns = [
     path('login_user/', views.login_user, name='login_user'),
     path('login_view/', views.login_view, name='login'),
     path('logout_view/', views.logout_view, name='logout'),
+    path('obtenerImagen/', views.obtenerImagen, name='obtenerImagen'),
+    path('obtenerAudio/', views.obtenerAudio, name='obtenerAudio'),
+    path('obtenerVideo/', views.obtenerVideo, name='obtenerVideo'),
 ]
 
 if settings.DEBUG:
