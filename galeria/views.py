@@ -10,30 +10,36 @@ from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
 
 
-
-@login_required(login_url='/galeria/login_user/')
+@csrf_exempt
 def index(request):
-    lstImagen = Imagen.objects.all()
-    lstAudio = Audio.objects.all()
-    lstVideo = Video.objects.all()
+    lstImagen = list(Imagen.objects.all())
+    lstAudio = list(Audio.objects.all())
+    lstVideo = list(Video.objects.all())
+    allObjects = lstImagen + lstAudio + lstVideo
     print(lstImagen)
-    return render(request, 'lista_galeria.html',
-                  context={'lstImagen': lstImagen, 'lstAudio': lstAudio, 'lstVideo': lstVideo})
+    return HttpResponse(serializers.serialize('json', allObjects))
 
+
+@csrf_exempt
+def viewImages(request):
+    return render(request, "lista_galeria.html")
+
+
+@csrf_exempt
 @login_required(login_url='/galeria/login_user/')
 def detalle(request, tipo, idbd):
     iUrl = None
     if tipo == settings.IMAGEN:
         multimedia = get_object_or_404(Imagen, id=idbd)
-        iUrl=multimedia.contenido.url
+        iUrl = multimedia.contenido.url
 
     if tipo == settings.VIDEO:
         multimedia = get_object_or_404(Video, id=idbd)
-        iUrl=multimedia.contenido.url
+        iUrl = multimedia.contenido.url
 
     if tipo == settings.AUDIO:
         multimedia = get_object_or_404(Audio, id=idbd)
-        iUrl=multimedia.contenido.url
+        iUrl = multimedia.contenido.url
 
     titulo = multimedia.titulo
     autor = multimedia.autor
@@ -43,11 +49,11 @@ def detalle(request, tipo, idbd):
     ciudad = multimedia.ciudad
     pais = multimedia.pais
 
-    if tipo == "audio" or tipo == "video" :
-        clips = Clip.objects.filter(referencia = idbd)
-    
+    if tipo == "audio" or tipo == "video":
+        clips = Clip.objects.filter(referencia=idbd)
+
     context = {'tipo': tipo, 'titulo': titulo, 'autor': autor, 'fecha_creacion': fecha_creacion, 'categoria': categoria,
-             'usuario':usuario,'ciudad':ciudad,'pais':pais,'iUrl':iUrl, 'clips': clips}
+               'usuario': usuario, 'ciudad': ciudad, 'pais': pais, 'iUrl': iUrl, 'clips': clips}
 
     return render(request, 'detalle.html', context)
 
@@ -96,6 +102,8 @@ def agregar_usuario(request):
         user_model.save()
     return HttpResponse(serializers.serialize('json', [user_model]))
 
+
+@csrf_exempt
 def login_user(request):
     return render(request, "login.html")
 

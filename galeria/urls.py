@@ -6,10 +6,10 @@ from django.conf.urls.static import static
 from . import views
 
 
-
 urlpatterns = [
     path('', views.index, name='index'),
     path('galeria', views.index, name='galeria'),
+    path('viewImages', views.viewImages, name='viewImages'),
     path('agregarUsuario/', views.agregar_usuario, name='agregarUsuario'),
     path('registrarUsuario/', views.registrar_usuario, name='registrarUsuario'),
     path('registrarUsuario/<int:id>', views.editar_usuario, name='editarUsuario'),
