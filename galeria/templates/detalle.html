@@ -67,38 +67,71 @@
 </div>
 <div>
     <h3>Agregar clip</h3>
+    {% if msg_error %}<p><strong>{{ msg_error }}</strong></p>{% endif %}
+    <form action="{% url 'agregarClip' tipo=tipo idbd=idbd %}" method="post">
+    {% csrf_token %}
+    <label>Nombre</label>
+    <input type="text" name="nombre" required><br/>
+    <label for="start">Segundo de inidio: </label>
+    <input id="start" type="number" min="0" max="0" value="0" name="inicio" required><br/>
+    <label for="stop">Segundo de fin: </label>
+    <input id="stop" type="number" min="0" max="0" value="0" name="fin" required><br/>
+    <input type="submit" value="Agregar"><br/>
+    </form>
 </div>
+{% endif %}
+
 <div>
     <a href="{% url 'index' %}">Regresar</a>
 </div>
-{% endif %}
 
 </body>
 </html>
 
 <script>
+        let video = document.getElementById('playerElm');
+        if(video) {
+            video.addEventListener('loadedmetadata', function() {
+                let duracion = Math.ceil(video.duration);
+                let inicio = document.getElementById('start');
+                let fin = document.getElementById('stop');
+                inicio.setAttribute('max', duracion);
+                fin.setAttribute('max', duracion);
+                fin.setAttribute('value', duracion);
+            });
+        }
+
+        var endTimeVideo = null;
+
+        function puseVideo() {    
+                if(endTimeVideo == null) return;
+                if (this.currentTime >= endTimeVideo) {
+                    this.removeEventListener("timeupdate",puseVideo);
+                    this.pause();
+                    endTimeVideo = null;
+                }
+            }
+
         function playVideo(starttime,endtime) {
             var video = document.getElementById('playerElm');
-
             //handler should be bound first
-            video.addEventListener("timeupdate", function() {
-                
-            if (this.currentTime >= endtime) {
-                    this.pause();
-                }
-            }, false);
-
+            endTimeVideo = endtime;
+            video.removeEventListener("timeupdate",puseVideo);
+            video.addEventListener("timeupdate",puseVideo , false);
             //suppose that video src has been already set properly
             
             video.load();
-            video.play();
+
+            const playPromise = video.play();
+            if (playPromise !== null){
+                playPromise.catch(() => { video.play(); })
+            }
 
             try {
                 video.currentTime = starttime;
             } catch (ex) {
                 console.log(ex)
             }
-
             //must call this otherwise can't seek on some browsers, e.g. Firefox 4
         }
     </script>
