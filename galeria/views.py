@@ -3,37 +3,45 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .models import Imagen, Audio, Video, Clip
 import json
 from django.core import serializers
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
+from django.urls import reverse
 
 
-
-@login_required(login_url='/galeria/login_user/')
+@csrf_exempt
 def index(request):
-    lstImagen = Imagen.objects.all()
-    lstAudio = Audio.objects.all()
-    lstVideo = Video.objects.all()
+    lstImagen = list(Imagen.objects.all())
+    lstAudio = list(Audio.objects.all())
+    lstVideo = list(Video.objects.all())
+    allObjects = lstImagen + lstAudio + lstVideo
     print(lstImagen)
-    return render(request, 'lista_galeria.html',
-                  context={'lstImagen': lstImagen, 'lstAudio': lstAudio, 'lstVideo': lstVideo})
+    return HttpResponse(serializers.serialize('json', allObjects))
 
+
+@csrf_exempt
+def viewImages(request):
+    return render(request, "lista_galeria.html")
+
+
+@csrf_exempt
 @login_required(login_url='/galeria/login_user/')
 def detalle(request, tipo, idbd):
     iUrl = None
     if tipo == settings.IMAGEN:
         multimedia = get_object_or_404(Imagen, id=idbd)
-        iUrl=multimedia.contenido.url
+        iUrl = multimedia.contenido.url
 
     if tipo == settings.VIDEO:
         multimedia = get_object_or_404(Video, id=idbd)
         iUrl=multimedia.contenido.url
+        cont = multimedia.contenido
 
     if tipo == settings.AUDIO:
         multimedia = get_object_or_404(Audio, id=idbd)
-        iUrl=multimedia.contenido.url
+        iUrl = multimedia.contenido.url
 
     titulo = multimedia.titulo
     autor = multimedia.autor
@@ -43,13 +51,33 @@ def detalle(request, tipo, idbd):
     ciudad = multimedia.ciudad
     pais = multimedia.pais
 
+
+    clips = None
     if tipo == "audio" or tipo == "video" :
         clips = Clip.objects.filter(referencia = idbd)
     
     context = {'tipo': tipo, 'titulo': titulo, 'autor': autor, 'fecha_creacion': fecha_creacion, 'categoria': categoria,
-             'usuario':usuario,'ciudad':ciudad,'pais':pais,'iUrl':iUrl, 'clips': clips}
+             'usuario':usuario,'ciudad':ciudad,'pais':pais,'iUrl':iUrl, 'clips': clips, 'idbd': idbd}
 
     return render(request, 'detalle.html', context)
+
+
+@login_required(login_url='/galeria/login_user/')
+def agregarClip(request, tipo, idbd):
+    reproducible = None
+    if tipo == settings.VIDEO:
+        reproducible = get_object_or_404(Video, id=idbd)
+    elif tipo == settings.AUDIO:
+        reproducible = get_object_or_404(Audio, id=idbd)
+    else:
+        return HttpResponseBadRequest('No se puede agregar un clip a una imagen')
+    if request.method == 'POST':
+        inicio = request.POST['inicio']
+        fin = request.POST['fin']
+        nombre = request.POST['nombre']
+        clip = Clip(nombre=nombre, segundo_inicio=inicio, segundo_fin=fin, referencia=reproducible)
+        clip.save()
+        return HttpResponseRedirect(reverse('detalleGal', args=(tipo,idbd)))
 
 
 @csrf_exempt
@@ -96,6 +124,8 @@ def agregar_usuario(request):
         user_model.save()
     return HttpResponse(serializers.serialize('json', [user_model]))
 
+
+@csrf_exempt
 def login_user(request):
     return render(request, "login.html")
 

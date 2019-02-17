@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Galería Multimedia</title>
     <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">-->
+    <script src="//code.jquery.com/jquery-3.3.1.min.js"></script>
 </head>
 <body>
 <li><a href="{% url 'editarUsuario' id=user.id %}">Editar Usuario</a></li>
@@ -42,5 +43,18 @@
         </div>
     {% endfor %}
 </div>
+<div id="images"></div>
 </body>
 </html>
+
+
+<script>
+    (function () {
+        $.getJSON("http://localhost:8000/galeria/").done(function (data) {
+            console.log(data)
+            $.each(data, function (i, item) {
+                $("#images").prepend('<img src="http://localhost:8000/' + item.fields.contenido + '" width="300px" height="300px">');
+            });
+        });
+    })();
+</script>
