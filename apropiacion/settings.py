@@ -132,6 +132,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'archivos/')
 
 STATICFILES_DIRS = ()
 
+ANGULAR_URL = 'https://apropiacionangular.herokuapp.com'
 
 IMAGEN='imagen'
 VIDEO='video'

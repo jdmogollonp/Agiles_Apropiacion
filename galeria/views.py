@@ -1,14 +1,16 @@
-from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, get_object_or_404, redirect
-from .models import Imagen, Audio, Video, Clip
 import json
-from django.core import serializers
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, HttpResponseBadRequest
-from django.views.decorators.csrf import csrf_exempt
-from django.contrib.auth.models import User
+
 from django.conf import settings
 from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
+from django.core import serializers
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, HttpResponseBadRequest
+from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
+from django.views.decorators.csrf import csrf_exempt
+
+from .models import Imagen, Audio, Video, Clip
 
 
 @csrf_exempt
@@ -18,11 +20,65 @@ def index(request):
     lstVideo = list(Video.objects.all())
     allObjects = lstImagen + lstAudio + lstVideo
     print(lstImagen)
-    return HttpResponse(serializers.serialize('json', allObjects))
+    return HttpResponse(serializers.serialize('json', lstImagen))
 
+def obtenerImagen(request):
+    lstImagen = list(Imagen.objects.all())
+    return HttpResponse(serializers.serialize('json', lstImagen))
+
+def obtenerAudio(request):
+    lstAudio = list(Audio.objects.all())
+    lstAudioJSON = []
+    for audio in lstAudio:
+        lstAudioJSON.append(
+        {
+            "model": "galeria.audio",
+            "pk": audio.id,
+            "fields":
+                {
+                    "titulo": audio.titulo,
+                    "autor": audio.autor,
+                    "fecha_creacion": audio.fecha_creacion,
+                    "ciudad": audio.ciudad,
+                    "pais": audio.pais,
+                    "categoria": audio.categoria.nombre,
+                    "usuario": str(audio.usuario),
+                    "contenido": audio.contenido.url
+                }
+        })
+    return JsonResponse(lstAudioJSON,safe=False)
+
+def obtenerVideo(request):
+    lstVideo = list(Video.objects.all())
+    #obj = json.encoder(lstVideo)
+
+    lstVideoT=[]
+
+    for video in lstVideo:
+        lstVideoT.append(
+            {
+                "model": "galeria.video",
+                "pk": video.id,
+                "fields":
+                {
+                        "titulo": video.titulo,
+                        "autor": video.autor,
+                        "fecha_creacion": video.fecha_creacion,
+                        "ciudad": video.ciudad,
+                        "pais": video.pais,
+                        "categoria": video.categoria.nombre,
+                        "usuario": str(video.usuario),
+                        "contenido": video.contenido.url
+                }
+            })
+
+    return JsonResponse(lstVideoT,safe=False)
 
 @csrf_exempt
 def viewImages(request):
+    lstImagen = list(Imagen.objects.all())
+    lstAudio = list(Audio.objects.all())
+    lstVideo = list(Video.objects.all())
     return render(request, "lista_galeria.html")
 
 
@@ -57,7 +113,7 @@ def detalle(request, tipo, idbd):
         clips = Clip.objects.filter(referencia = idbd)
     
     context = {'tipo': tipo, 'titulo': titulo, 'autor': autor, 'fecha_creacion': fecha_creacion, 'categoria': categoria,
-             'usuario':usuario,'ciudad':ciudad,'pais':pais,'iUrl':iUrl, 'clips': clips, 'idbd': idbd}
+             'usuario':usuario,'ciudad':ciudad,'pais':pais,'iUrl':iUrl, 'clips': clips, 'idbd': idbd, 'angular_url':settings.ANGULAR_URL}
 
     return render(request, 'detalle.html', context)
 

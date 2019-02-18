@@ -19,7 +19,7 @@
 </ul>
 <p>Links importantes del proyecto:</p>
 <ul>
-    <li><a href="/galeria">Galeria</a></li>
+    <li><a href="{{ angular_url }}/gallery">Galeria</a></li>
     <li><a href="/admin">Admin</a></li>
     {% if user.is_authenticated %}
         <li>Bienvenido {{ user.username }}</li>
@@ -27,7 +27,7 @@
         <li><a href="{% url 'editarUsuario' id=user.id %}">Editar Usuario</a></li>
     {% else %}
         <li><a href="/galeria/login_user/">Inciar Sesión</a></li>
-        <li><a href="/galeria/registrarUsuario/">Registrar Usuario</a></li>
+        <li><a href="{{ angular_url }}/register">Registrar Usuario</a></li>
     {% endif %}
 </ul>
 </body>
