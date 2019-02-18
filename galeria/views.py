@@ -33,7 +33,24 @@ def obtenerAudio(request):
 def obtenerVideo(request):
     lstVideo = list(Video.objects.all())
     #obj = json.encoder(lstVideo)
-    return HttpResponse(serializers.serialize('json', lstVideo))
+
+    lstVideoT=[]
+
+    for video in lstVideo:
+        lstVideoT.append(
+            {
+                "id":video.id,
+                "titulo" : video.titulo,
+                "autor" : video.autor,
+                "fecha_creacion" : video.fecha_creacion,
+                "ciudad" : video.ciudad,
+                "pais" : video.pais,
+                "categoria" : video.categoria.nombre,
+                "usuario" : str(video.usuario),
+                "contenido":video.contenido.url,
+            })
+
+    return JsonResponse(lstVideoT,safe=False)
 
 @csrf_exempt
 def viewImages(request):
