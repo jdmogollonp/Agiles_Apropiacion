@@ -28,7 +28,25 @@ def obtenerImagen(request):
 
 def obtenerAudio(request):
     lstAudio = list(Audio.objects.all())
-    return HttpResponse(serializers.serialize('json', lstAudio))
+    lstAudioJSON = []
+    for audio in lstAudio:
+        lstAudioJSON.append(
+        {
+            "model": "galeria.audio",
+            "pk": audio.id,
+            "fields":
+                {
+                    "titulo": audio.titulo,
+                    "autor": audio.autor,
+                    "fecha_creacion": audio.fecha_creacion,
+                    "ciudad": audio.ciudad,
+                    "pais": audio.pais,
+                    "categoria": audio.categoria.nombre,
+                    "usuario": str(audio.usuario),
+                    "contenido": audio.contenido.url
+                }
+        })
+    return JsonResponse(lstAudioJSON,safe=False)
 
 def obtenerVideo(request):
     lstVideo = list(Video.objects.all())
@@ -39,15 +57,19 @@ def obtenerVideo(request):
     for video in lstVideo:
         lstVideoT.append(
             {
-                "id":video.id,
-                "titulo" : video.titulo,
-                "autor" : video.autor,
-                "fecha_creacion" : video.fecha_creacion,
-                "ciudad" : video.ciudad,
-                "pais" : video.pais,
-                "categoria" : video.categoria.nombre,
-                "usuario" : str(video.usuario),
-                "contenido":video.contenido.url,
+                "model": "galeria.video",
+                "pk": video.id,
+                "fields":
+                {
+                        "titulo": video.titulo,
+                        "autor": video.autor,
+                        "fecha_creacion": video.fecha_creacion,
+                        "ciudad": video.ciudad,
+                        "pais": video.pais,
+                        "categoria": video.categoria.nombre,
+                        "usuario": str(video.usuario),
+                        "contenido": video.contenido.url
+                }
             })
 
     return JsonResponse(lstVideoT,safe=False)
@@ -91,7 +113,7 @@ def detalle(request, tipo, idbd):
         clips = Clip.objects.filter(referencia = idbd)
     
     context = {'tipo': tipo, 'titulo': titulo, 'autor': autor, 'fecha_creacion': fecha_creacion, 'categoria': categoria,
-             'usuario':usuario,'ciudad':ciudad,'pais':pais,'iUrl':iUrl, 'clips': clips, 'idbd': idbd}
+             'usuario':usuario,'ciudad':ciudad,'pais':pais,'iUrl':iUrl, 'clips': clips, 'idbd': idbd, 'angular_url':settings.ANGULAR_URL}
 
     return render(request, 'detalle.html', context)
 
