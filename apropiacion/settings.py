@@ -132,8 +132,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'archivos/')
 
 STATICFILES_DIRS = ()
 
-ANGULAR_URL = 'http://localhost:4200'
+ANGULAR_URL = 'https://apropiacionangular.herokuapp.com'
+URL = 'https://apropiacion.herokuapp.com'
 
 IMAGEN='imagen'
 VIDEO='video'
 AUDIO='audio'
+
+EMAIL_HOST_USER = os.environ['EMAIL_HOST_USER']
+EMAIL_HOST_PASSWORD = os.environ['EMAIL_HOST_PASSWORD']
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = '587'
