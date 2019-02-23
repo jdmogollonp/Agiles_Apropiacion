@@ -45,10 +45,12 @@ def obtenerCategorias(request):
     lstCategoriasJSON.append({"id": 1, "description":"todo"})
     contador = 2
     for categoria in lstCategorias:
+        print(categoria.id)
         lstCategoriasJSON.append(
             {
                 "id": contador,
-                "description": categoria.nombre
+                "description": categoria.nombre,
+                "categoriaid": categoria.id,
             }
         )
         contador += 1
@@ -57,7 +59,25 @@ def obtenerCategorias(request):
 
 def obtenerImagen(request):
     lstImagen = list(Imagen.objects.all())
-    return HttpResponse(serializers.serialize('json', lstImagen))
+    lstImagenJSON = []
+    for imagen in lstImagen:
+        lstImagenJSON.append(
+        {
+            "model": "galeria.imagen",
+            "pk": imagen.id,
+            "fields":
+                {
+                    "titulo": imagen.titulo,
+                    "autor": imagen.autor,
+                    "fecha_creacion": imagen.fecha_creacion,
+                    "ciudad": imagen.ciudad,
+                    "pais": imagen.pais,
+                    "categoria": imagen.categoria.nombre,
+                    "usuario": str(imagen.usuario),
+                    "contenido": imagen.contenido.url
+                }
+        })
+    return JsonResponse(lstImagenJSON,safe=False)
 
 
 def obtenerAudio(request):
