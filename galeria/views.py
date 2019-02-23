@@ -10,7 +10,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import Imagen, Audio, Video, Clip
+from .models import Imagen, Audio, Video, Clip, Categoria
 
 
 @csrf_exempt
@@ -22,9 +22,42 @@ def index(request):
     print(lstImagen)
     return HttpResponse(serializers.serialize('json', lstImagen))
 
+
+def obtenerTipoMultimedia(request):
+    lstTipoMultimedia = ['Todo','Imagen','Video','Audio']
+    lstTipoMultimediaJSON = [];
+    contador = 1
+    for tipo in lstTipoMultimedia:
+        lstTipoMultimediaJSON.append(
+            {
+                "id": contador,
+                "description": tipo
+            }
+        )
+        contador += 1
+    return JsonResponse(lstTipoMultimediaJSON,safe=False)
+
+
+def obtenerCategorias(request):
+    lstCategorias = list(Categoria.objects.all())
+    lstCategoriasJSON = [];
+    lstCategoriasJSON.append({"id": 1, "description":"todo"})
+    contador = 2
+    for categoria in lstCategorias:
+        lstCategoriasJSON.append(
+            {
+                "id": contador,
+                "description": categoria.nombre
+            }
+        )
+        contador += 1
+    return JsonResponse(lstCategoriasJSON,safe=False)
+
+
 def obtenerImagen(request):
     lstImagen = list(Imagen.objects.all())
     return HttpResponse(serializers.serialize('json', lstImagen))
+
 
 def obtenerAudio(request):
     lstAudio = list(Audio.objects.all())
