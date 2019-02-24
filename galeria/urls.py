@@ -22,6 +22,8 @@ urlpatterns = [
     path('obtenerImagen/', views.obtenerImagen, name='obtenerImagen'),
     path('obtenerAudio/', views.obtenerAudio, name='obtenerAudio'),
     path('obtenerVideo/', views.obtenerVideo, name='obtenerVideo'),
+    path('obtenerCategorias', views.obtenerCategorias, name='obtenerCategorias'),
+    path('obtenerTipoMultimedia', views.obtenerTipoMultimedia, name='obtenerTipoMultimedia')
 ]
 
 if settings.DEBUG:

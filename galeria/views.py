@@ -5,12 +5,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.core import serializers
+from django.core.mail import send_mail
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, HttpResponseBadRequest
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
 
-from .models import Imagen, Audio, Video, Clip
+from .models import Imagen, Audio, Video, Clip, Categoria
 
 
 @csrf_exempt
@@ -22,9 +23,62 @@ def index(request):
     print(lstImagen)
     return HttpResponse(serializers.serialize('json', lstImagen))
 
+
+def obtenerTipoMultimedia(request):
+    lstTipoMultimedia = ['Todo','Imagen','Video','Audio']
+    lstTipoMultimediaJSON = [];
+    contador = 1
+    for tipo in lstTipoMultimedia:
+        lstTipoMultimediaJSON.append(
+            {
+                "id": contador,
+                "description": tipo
+            }
+        )
+        contador += 1
+    return JsonResponse(lstTipoMultimediaJSON,safe=False)
+
+
+def obtenerCategorias(request):
+    lstCategorias = list(Categoria.objects.all())
+    lstCategoriasJSON = [];
+    lstCategoriasJSON.append({"id": 1, "description":"todo"})
+    contador = 2
+    for categoria in lstCategorias:
+        print(categoria.id)
+        lstCategoriasJSON.append(
+            {
+                "id": contador,
+                "description": categoria.nombre,
+                "categoriaid": categoria.id,
+            }
+        )
+        contador += 1
+    return JsonResponse(lstCategoriasJSON,safe=False)
+
+
 def obtenerImagen(request):
     lstImagen = list(Imagen.objects.all())
-    return HttpResponse(serializers.serialize('json', lstImagen))
+    lstImagenJSON = []
+    for imagen in lstImagen:
+        lstImagenJSON.append(
+        {
+            "model": "galeria.imagen",
+            "pk": imagen.id,
+            "fields":
+                {
+                    "titulo": imagen.titulo,
+                    "autor": imagen.autor,
+                    "fecha_creacion": imagen.fecha_creacion,
+                    "ciudad": imagen.ciudad,
+                    "pais": imagen.pais,
+                    "categoria": imagen.categoria.nombre,
+                    "usuario": str(imagen.usuario),
+                    "contenido": imagen.contenido.url
+                }
+        })
+    return JsonResponse(lstImagenJSON,safe=False)
+
 
 def obtenerAudio(request):
     lstAudio = list(Audio.objects.all())
@@ -133,6 +187,8 @@ def agregarClip(request, tipo, idbd):
         nombre = request.POST['nombre']
         clip = Clip(nombre=nombre, segundo_inicio=inicio, segundo_fin=fin, referencia=reproducible)
         clip.save()
+        send_mail('Nuevo clip agregado a ' +  reproducible.titulo,'el usuario "' + request.user.username + '" agrego un nuevo clip llamado "' + nombre + '" a tu video "' + reproducible.titulo + '"'
+        +'\n' + settings.URL + '/galeria/'+tipo +'/'+ str(idbd),'smarttoolsg14@gmail.com',[reproducible.usuario.usuario.email],fail_silently=False)
         return HttpResponseRedirect(reverse('detalleGal', args=(tipo,idbd)))
 
 
