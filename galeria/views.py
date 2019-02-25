@@ -188,7 +188,7 @@ def agregarClip(request, tipo, idbd):
         clip = Clip(nombre=nombre, segundo_inicio=inicio, segundo_fin=fin, referencia=reproducible)
         clip.save()
         send_mail('Nuevo clip agregado a ' +  reproducible.titulo,'el usuario "' + request.user.username + '" agrego un nuevo clip llamado "' + nombre + '" a tu video "' + reproducible.titulo + '"'
-        +'\n' + settings.URL + '/galeria/'+tipo +'/'+ str(idbd),'smarttoolsg14@gmail.com',[reproducible.usuario.usuario.email],fail_silently=False)
+        +'\n' + settings.URL + '/galeria/'+tipo +'/'+ str(idbd),settings.EMAIL_HOST_USER,[reproducible.usuario.usuario.email],fail_silently=False)
         return HttpResponseRedirect(reverse('detalleGal', args=(tipo,idbd)))
 
 
